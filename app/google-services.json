@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "520981963456",
+    "firebase_url": "https://plantopia-login-default-rtdb.firebaseio.com",
+    "project_id": "plantopia-login",
+    "storage_bucket": "plantopia-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520981963456:android:70d397e4fc666311918325",
+        "android_client_info": {
+          "package_name": "com.example.palntopia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZTzMQgkftNKjrGDxbylQeK0OVaOMkVE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
