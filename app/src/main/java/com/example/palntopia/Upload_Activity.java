@@ -1,3 +1,4 @@
+
 package com.example.palntopia;
 
 import android.app.Activity;
@@ -29,6 +30,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Upload_Activity extends AppCompatActivity {
 
     ImageView UploadImg;
@@ -57,15 +61,23 @@ public class Upload_Activity extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             uri = data.getData();
-                            UploadImg.setImageURI(uri);
+                            try {
+                                // Load a scaled-down version of the image to avoid memory issues
+                                InputStream imageStream = getContentResolver().openInputStream(uri);
+
+                                Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+                                UploadImg.setImageBitmap(bitmap);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                Toast.makeText(Upload_Activity.this, "Error loading image", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             Toast.makeText(Upload_Activity.this, "No Image Selected", Toast.LENGTH_SHORT).show();
-
-
                         }
                     }
                 }
         );
+
         UploadImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,9 +95,9 @@ public class Upload_Activity extends AppCompatActivity {
         });
     }
 
-    public Void saveData() {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Image").
-                child(uri.getLastPathSegment());
+    public void saveData() {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Image")
+                .child(uri.getLastPathSegment());
         AlertDialog.Builder builder = new AlertDialog.Builder(Upload_Activity.this);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
@@ -95,78 +107,50 @@ public class Upload_Activity extends AppCompatActivity {
         storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
+                // Use Task API to get the download URL instead of a while loop
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete()) ;
-                Uri urlImage = uriTask.getResult();
-                imageURL = urlImage.toString();
-                uploadData();
-                dialog.dismiss();
+                uriTask.addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri urlImage = task.getResult();
+                            imageURL = urlImage.toString();
+                            uploadData();
+                            dialog.dismiss();
+                        } else {
+                            dialog.dismiss();
+                            Toast.makeText(Upload_Activity.this, "Error getting download URL", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 dialog.dismiss();
+                Toast.makeText(Upload_Activity.this, "Upload failed", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return null;
     }
-        public void uploadData() {
-            String title = UploadName.getText().toString();
-            String type = UploadType.getText().toString();
-            String water = UploadWater.getText().toString();
-            String sun = UploadSun.getText().toString();
 
-            DataClass dataClass = new DataClass(title, type, water, sun, imageURL);
-            FirebaseDatabase.getInstance().getReference("Android Tutorials").child(title).
-                    setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(Upload_Activity.this, "Saved", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
+    public void uploadData() {
+        String title = UploadName.getText().toString();
+        String type = UploadType.getText().toString();
+        String water = UploadWater.getText().toString();
+        String sun = UploadSun.getText().toString();
+
+        DataClass dataClass = new DataClass(title, type, water, sun, imageURL);
+        FirebaseDatabase.getInstance().getReference("Android Tutorials").child(title)
+                .setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Upload_Activity.this, "Saved", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(Upload_Activity.this, "Error uploading data", Toast.LENGTH_SHORT).show();
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Upload_Activity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-        }
-    private void displayImage(Uri uri) {
-        // Load the image with resizing
-        Bitmap bitmap = decodeUri(uri);
-        UploadImg.setImageBitmap(bitmap);
+                    }
+                });
     }
-
-
-    private Bitmap decodeUri(Uri selectedImage) {
-        try {
-            // Decode image size
-            BitmapFactory.Options o = new BitmapFactory.Options();
-            o.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o);
-
-            // The new size we want to scale to
-            final int REQUIRED_SIZE = 200;
-
-            // Find the correct scale value. It should be the power of 2.
-            int scale = 1;
-            while (o.outWidth / scale / 2 >= REQUIRED_SIZE && o.outHeight / scale / 2 >= REQUIRED_SIZE) {
-                scale *= 2;
-            }
-
-            // Decode with inSampleSize
-            BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize = scale;
-            return BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o2);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    }
+}

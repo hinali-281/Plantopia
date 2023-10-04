@@ -19,7 +19,7 @@ public class Activity4_home extends AppCompatActivity {
 
         fab = findViewById(R.id.fab);
 
-        if (fab != null) {
+
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -27,6 +27,6 @@ public class Activity4_home extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-        }
+
     }
 }
