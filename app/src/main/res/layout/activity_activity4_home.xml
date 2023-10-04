@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity4_home">
-    <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
 
-        <EditText
-            android:id="@+id/plantNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Plant Name"/>
+    <EditText
+        android:id="@+id/plantNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Plant Name"
+        android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/plantWaterEditText"
@@ -31,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/plantWaterEditText"
             android:layout_marginTop="16dp"
+
             android:hint="Plant Sun"/>
 
         <Button
@@ -38,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/plantSunEditText"
+            android:textColor="@color/white"
             android:layout_marginTop="16dp"
             android:text="Add Plant"/>
 
@@ -47,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/addButton"
             android:layout_marginTop="16dp"
+            android:textColor="@color/white"
             android:text="Update Plant"/>
 
         <Button
@@ -54,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/updateButton"
+            android:textColor="@color/white"
             android:layout_marginTop="16dp"
             android:text="View Plants"/>
 
@@ -63,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/viewButton"
             android:layout_marginTop="16dp"
+            android:textColor="@color/white"
             android:text="Delete Plant"/>
 
         <TextView
@@ -70,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/deleteButton"
+
             android:layout_marginTop="16dp"
             android:text=""
             android:textSize="16sp"/>
@@ -77,4 +79,3 @@
     </RelativeLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
