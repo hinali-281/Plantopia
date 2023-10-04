@@ -54,9 +54,8 @@ public class MainActivity3_login extends AppCompatActivity {
 
                                 if (getPassword.equals(password)) {
                                     Toast.makeText(MainActivity3_login.this, "successfully Logged in", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(MainActivity3_login.this, activity4_home.class);
+                                    Intent intent = new Intent(MainActivity3_login.this, Activity4_home.class);
                                     startActivity(intent);
-                                    finish();
                                 }
                                 else {
                                     Toast.makeText(MainActivity3_login.this, "check your Username and Password", Toast.LENGTH_SHORT).show();

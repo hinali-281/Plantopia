@@ -1,67 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- activity_home.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Activity4_home">
 
-    <!-- Image Upload Button -->
-    <Button
-        android:id="@+id/btnUploadPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload Photo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"/>
-
-    <!-- Plant Name -->
-    <EditText
-        android:id="@+id/etPlantName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Plant Name"
-        android:layout_below="@id/btnUploadPhoto"
-        android:layout_marginTop="20dp"
-        android:padding="8dp"/>
-
-    <!-- Plant Water -->
-    <EditText
-        android:id="@+id/etPlantWater"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Plant Water"
-        android:layout_below="@id/etPlantName"
-        android:layout_marginTop="20dp"
-        android:padding="8dp"/>
-
-    <!-- Plant Sun -->
-    <EditText
-        android:id="@+id/etPlantSun"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Plant Sun"
-        android:layout_below="@id/etPlantWater"
-        android:layout_marginTop="20dp"
-        android:padding="8dp"/>
-
-    <!-- Plant Description -->
-    <EditText
-        android:id="@+id/etPlantDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Plant Description"
-        android:layout_below="@id/etPlantSun"
-        android:layout_marginTop="20dp"
-        android:padding="8dp"/>
-
-    <!-- Save Button -->
-    <Button
-        android:id="@+id/btnSavePlant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save Plant"
-        android:layout_below="@id/etPlantDescription"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"/>
-</RelativeLayout>
-
-    
+</androidx.constraintlayout.widget.ConstraintLayout>
