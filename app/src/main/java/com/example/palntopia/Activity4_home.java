@@ -12,9 +12,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Activity4_home extends AppCompatActivity {
+
     private EditText plantNameEditText, plantWaterEditText, plantSunEditText;
     private TextView resultTextView;
-    private Button addButton, updateButton, viewButton, deleteButton;
+    private Button addButton, updateButton, viewButton, deleteButton, clearButton;
 
     private PlantDbHelper dbHelper;
 
@@ -34,6 +35,8 @@ public class Activity4_home extends AppCompatActivity {
         updateButton = findViewById(R.id.updateButton);
         viewButton = findViewById(R.id.viewButton);
         deleteButton = findViewById(R.id.deleteButton);
+        clearButton = findViewById(R.id.clearButton);
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,20 @@ public class Activity4_home extends AppCompatActivity {
                 deletePlant();
             }
         });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearFields();
+            }
+        });
+
+
+    }
+    private void clearFields() {
+        plantNameEditText.getText().clear();
+        plantWaterEditText.getText().clear();
+        plantSunEditText.getText().clear();
     }
 
     private void addPlant() {
@@ -118,7 +135,7 @@ public class Activity4_home extends AppCompatActivity {
 
         StringBuilder result = new StringBuilder("Plant details:\n");
         while (cursor.moveToNext()) {
-            long itemId = cursor.getLong(((Cursor) cursor).getColumnIndexOrThrow(PlantContract.PlantEntry._ID));
+            long itemId = cursor.getLong(cursor.getColumnIndexOrThrow(PlantContract.PlantEntry._ID));
             String plantName = cursor.getString(cursor.getColumnIndexOrThrow(PlantContract.PlantEntry.COLUMN_NAME));
             String water = cursor.getString(cursor.getColumnIndexOrThrow(PlantContract.PlantEntry.COLUMN_WATER));
             String sun = cursor.getString(cursor.getColumnIndexOrThrow(PlantContract.PlantEntry.COLUMN_SUN));
@@ -141,4 +158,6 @@ public class Activity4_home extends AppCompatActivity {
 
         resultTextView.setText("Deleted " + deletedRows + " rows");
     }
+
+
 }
