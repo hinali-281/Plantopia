@@ -52,9 +52,12 @@ public class MainActivity3_login extends AppCompatActivity {
                             if (snapshot.hasChild(username)) {
                                 final String getPassword = snapshot.child(username).child("password").getValue(String.class);
 
+
                                 if (getPassword.equals(password)) {
                                     Toast.makeText(MainActivity3_login.this, "successfully Logged in", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(MainActivity3_login.this, Activity4_home.class);
+                                    Intent intent = new Intent(MainActivity3_login.this, Home_page.class);
+                                    intent.putExtra("USERNAME", username);
+
                                     startActivity(intent);
                                 }
                                 else {

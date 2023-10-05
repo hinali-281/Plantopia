@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Palntopia"
         tools:targetApi="31">
         <activity
+            android:name=".account_activity"
+            android:exported="false" />
+        <activity
             android:name=".Home_page"
             android:exported="false" />
         <activity

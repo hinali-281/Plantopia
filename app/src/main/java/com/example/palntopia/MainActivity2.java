@@ -1,8 +1,5 @@
 package com.example.palntopia;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,9 +81,20 @@ public class MainActivity2 extends AppCompatActivity  {
                               databaseReference.child("users").child(username).child("email").setValue(etEmailAddress.getText().toString());
                               databaseReference.child("users").child(username).child("password").setValue(etPassword.getText().toString());
                               Toast.makeText(MainActivity2.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                              Intent intent = new Intent(MainActivity2.this, MainActivity3_login.class);
-                              startActivity(intent);
+                              Intent logInintent = new Intent(MainActivity2.this, MainActivity3_login.class);
+                              startActivity(logInintent);
+
+                              Intent accountIntent =new Intent(MainActivity2.this,account_activity.class);
+                              accountIntent.putExtra("USERNAME", username);
+                              accountIntent.putExtra("EMAIL", email);
+                              accountIntent.putExtra("PHONE", phoneNumber);
+
                               finish();
+
+                              databaseReference.child("users").child(username).child("username").setValue(etUsername.getText().toString());
+                              databaseReference.child("users").child(username).child("email").setValue(etEmailAddress.getText().toString());
+                              databaseReference.child("users").child(username).child("password").setValue(etPassword.getText().toString());
+                              Toast.makeText(MainActivity2.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
 
                           }
                       }
