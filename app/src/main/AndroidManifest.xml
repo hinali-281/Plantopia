@@ -16,6 +16,21 @@
         android:theme="@style/Theme.Palntopia"
         tools:targetApi="31">
         <activity
+            android:name=".SnackPlant_img"
+            android:exported="false" />
+        <activity
+            android:name=".RoseMary_img"
+            android:exported="false" />
+        <activity
+            android:name=".Dandelion_img"
+            android:exported="false" />
+        <activity
+            android:name=".PeaceLiy_img"
+            android:exported="false" />
+        <activity
+            android:name=".AloVera_IMG"
+            android:exported="false" />
+        <activity
             android:name=".account_activity"
             android:exported="false" />
         <activity

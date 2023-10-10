@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Home_page extends AppCompatActivity {
     TextView user;
-    ImageView account_details_page,post_add_page;
+    ImageView account_details_page,post_add_page,AloVera,PeaceLily,Dandelion,RoseMary,SnackPlant;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -21,6 +21,47 @@ public class Home_page extends AppCompatActivity {
         TextView textViewUsername = findViewById(R.id.textView12);
         account_details_page= findViewById(R.id.account_details_page);
         post_add_page= findViewById(R.id.post_add_page);
+        AloVera=findViewById(R.id.AloVera);
+        PeaceLily=findViewById(R.id.PeaceLily);
+        Dandelion=findViewById(R.id.Dandelion);
+        RoseMary=findViewById(R.id.RoseMary);
+        SnackPlant=findViewById(R.id.SnackPlant);
+
+        AloVera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_page.this, AloVera_IMG.class);
+                startActivity(intent);
+            }
+        });
+        PeaceLily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_page.this, PeaceLiy_img.class);
+                startActivity(intent);
+            }
+        });
+        Dandelion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_page.this, Dandelion_img.class);
+                startActivity(intent);
+            }
+        });
+        RoseMary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_page.this, RoseMary_img.class);
+                startActivity(intent);
+            }
+        });
+        SnackPlant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_page.this, RoseMary_img.class);
+                startActivity(intent);
+            }
+        });
         account_details_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
